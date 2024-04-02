@@ -1,63 +1,69 @@
 <div class="container bg-light p-4">
-
   <div class="row">
     <div class="col-7 m-auto">
-      <h1 class="text-center"> Cadastro de Alunos</h1>
+      <h1 class="text-center">Cadastro de Alunos</h1>
       <form [formGroup]="formGroupStudent">
-        <div class="mb-3">
-          <label for="matricula" class="form-label">Matricula</label>
-          <input
-           type="text"
-           class="form-control"
-           id="matricula"
-           formControlName="id">
-         </div>
-         <div class="container">
+        <div class="container">
           <form>
             <div class="mb-3">
               <label for="nome" class="form-label">Nome</label>
               <input
-               type="text"
-               class="form-control"
-               id="nome"
-               formControlName="name">
-             </div>
+                type="text"
+                class="form-control"
+                id="nome"
+                formControlName="name"
+              />
+            </div>
           </form>
         </div>
         <div class="mb-3">
           <label for="curso" class="form-label">Curso</label>
           <input
-           type="text"
-           class="form-control"
-           id="curso"
-           formControlName="course">
-         </div>
+            type="text"
+            class="form-control"
+            id="curso"
+            formControlName="course"
+          />
+        </div>
       </form>
-      <button type="button"
-       class="btn btn-primary"
-       (click)="save()"
-       >Salvar</button>
+      <button type="button" class="btn btn-primary" (click)="save()">
+        Salvar
+      </button>
 
-      <h2 class="mt-5 text-center"> Alunos</h2>
+      <h2 class="mt-5 text-center">Alunos</h2>
       <table class="table table-striped">
-
-          <thead>
-      <tr>
-      <th scope="col"> Matrícula</th>
-      <th scope="col"> Nome</th>
-      <th scope="col"> Curso</th>
-      </tr>
-          </thead>
-          <tbody>
-      <tr *ngFor="let student of students">
-      <th scope="row">{{student.id}}</th>
-      <td>{{student.name}}</td>
-      <td>{{student.course}}</td>
-      </tr>
-          </tbody>
+        <thead>
+          <tr>
+            <th scope="col">Matrícula</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Curso</th>
+            <th scope="col">Opções</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <th scope="row">{{ student.id }}</th>
+            <td>{{ student.name }}</td>
+            <td>{{ student.course }}</td>
+            <td>
+              <button
+                type="button"
+                class="btn btn-primary"
+                (click)="edit(student)"
+              >
+                Alterar
+              </button>
+              <button
+                type="button"
+                class="btn btn-danger"
+                (click)="delete(student)"
+              >
+                Remover
+              </button>
+            </td>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
 </div>
-
-

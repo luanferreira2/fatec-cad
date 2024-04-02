@@ -2,23 +2,18 @@
   "students": [
     {
       "id": 1,
-      "name": "Otário",
-      "course": "Computacao"
+      "name": "Ota3123",
+      "course": "23123"
     },
     {
       "id": 2,
-      "name": "Otário2",
-      "course": "Computacao"
+      "name": "Otario da Silva",
+      "course": "Pão"
     },
     {
       "id": 3,
-      "name": "Otário3",
-      "course": "Computacao"
-    },
-    {
-      "id": "4",
-      "name": "Da Silva",
-      "course": "Computacao"
+      "name": "13",
+      "course": "3232"
     }
   ]
 }
