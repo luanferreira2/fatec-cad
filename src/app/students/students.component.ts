@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Student } from '../student';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentsService } from '../students.service';
 
 @Component({
@@ -12,6 +12,7 @@ export class StudentsComponent implements OnInit {
   students: Student[] = [];
   formGroupStudent: FormGroup;
   isEditing: boolean = false;
+  submited: boolean = false;
 
   ngOnInit(): void {
     this.loadStudent();
@@ -29,25 +30,32 @@ export class StudentsComponent implements OnInit {
   ) {
     this.formGroupStudent = formBuilder.group({
       id: [''],
-      name: [''],
-      course: [''],
+      name: ['', [Validators.minLength(3)]],
+      course: ['', [Validators.required]],
     });
   }
 
   save() {
-    if (this.isEditing) {
-      this.service.update(this.formGroupStudent.value).subscribe({
-        next: () => {
-          this.loadStudent();
-          this.isEditing = false;
-        },
-      });
-    } else {
-      this.service.save(this.formGroupStudent.value).subscribe({
-        next: (data) => this.students.push(data),
-      });
+    this.submited = true;
+    if (this.formGroupStudent.valid) {
+      if (this.isEditing) {
+        this.service.update(this.formGroupStudent.value).subscribe({
+          next: () => {
+            this.loadStudent();
+            this.isEditing = false;
+            this.submited = false;
+          },
+        });
+      } else {
+        this.service.save(this.formGroupStudent.value).subscribe({
+          next: (data) => {
+            this.students.push(data);
+            this.submited = false;
+          },
+        });
+      }
+      this.formGroupStudent.reset();
     }
-    this.formGroupStudent.reset();
   }
 
   delete(student: Student) {
@@ -59,5 +67,13 @@ export class StudentsComponent implements OnInit {
   edit(student: Student) {
     this.formGroupStudent.setValue(student);
     this.isEditing = true;
+  }
+
+  get name(): any {
+    return this.formGroupStudent.get('name');
+  }
+
+  get course(): any {
+    return this.formGroupStudent.get('course');
   }
 }

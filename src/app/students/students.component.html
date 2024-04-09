@@ -13,6 +13,12 @@
                 id="nome"
                 formControlName="name"
               />
+              <small *ngIf="name.hasError('minlenght')" class="text-danger">
+                * O nome tem que ter no mínimo 3 caracteres!
+              </small>
+              <small *ngIf="name.hasError('required')" class="text-danger">
+                * O nome é requirido!
+              </small>
             </div>
           </form>
         </div>
@@ -24,6 +30,9 @@
             id="curso"
             formControlName="course"
           />
+          <small *ngIf="course.hasError('requirid')" class="text-danger">
+            * O curso é requirido
+          </small>
         </div>
       </form>
       <button type="button" class="btn btn-primary" (click)="save()">
